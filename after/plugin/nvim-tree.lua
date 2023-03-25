@@ -17,11 +17,6 @@ end
 
 local function open_nvim_tree(data)
 
-  -- buffer is a real file on the disk
-  local real_file = vim.fn.filereadable(data.file) == 1
-
-  -- buffer is a [No Name]
-  local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
 
   -- buffer is a directory
   local directory = vim.fn.isdirectory(data.file) == 1
@@ -33,9 +28,19 @@ local function open_nvim_tree(data)
     -- wipe the directory buffer
     vim.cmd.bw(data.buf)
     vim.cmd.cd(data.file)
+    vim.defer_fn(open_last_file, 20)
+  else
+    -- buffer is a real file on the disk
+    local real_file = vim.fn.filereadable(data.file) == 1
+
+    -- buffer is a [No Name]
+    local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
+
+    if not real_file and no_name then  
+      return
+    end
   end
 
-  vim.defer_fn(open_last_file, 20)
 
   -- open the tree, find the file but don't focus it
   require("nvim-tree.api").tree.toggle({focus = false})
