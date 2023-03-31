@@ -15,4 +15,5 @@ vim.keymap.set('n', '<leader>ff', function()
 	end
 end)
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fd', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>dd', builtin.diagnostics, {})
