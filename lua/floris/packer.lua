@@ -47,8 +47,7 @@ return require('packer').startup(function(use)
 
     end
   }
-  
-
+  use { 'mhartington/formatter.nvim' }
   -- Colorscheme
   use({
     'ful1e5/onedark.nvim',
@@ -60,6 +59,19 @@ return require('packer').startup(function(use)
         dark_float = false
       })
     end
+  })
+
+  use({
+    "utilyre/barbecue.nvim",
+    tag = "*",
+    requires = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    after = "nvim-web-devicons", -- keep this if you're using NvChad
+    config = function()
+      require("barbecue").setup()
+    end,
   })
 
   -- nvim tree
