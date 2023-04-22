@@ -1,4 +1,5 @@
 local lsp = require('lsp-zero')
+local lspConfig = require('lspconfig')
 lsp.preset('recommended')
 
 lsp.ensure_installed({

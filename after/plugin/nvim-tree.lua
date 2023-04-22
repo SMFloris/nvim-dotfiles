@@ -74,13 +74,10 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 vim.api.nvim_create_autocmd({ "QuitPre"  }, {
     callback = function() vim.cmd("NvimTreeClose") end,
 })
-vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeToggle<cr>",
+vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeFindFileToggle<cr>",
   {silent = true, noremap = true}
 )
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>fe", "<cmd>NvimTreeFindFile<bar>NvimTreeFocus<cr>",
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFindFile<cr>",
   {silent = true, noremap = true}
 )
 
@@ -112,5 +109,10 @@ require("nvim-tree").setup({
   git = {
     show_on_dirs = true,
     show_on_open_dirs = false
-  }
+  },
+  actions = {
+    open_file = {
+      resize_window = false
+    }
+  },
 })
